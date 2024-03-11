@@ -195,7 +195,7 @@ int main()
         cout<<"Szybkie -> 5\n";
         cin>>sort;
 
-        wyniki.open("AiZO"+Nazwy_wynikow[sort-1]+".txt");
+        wyniki.open("AiZO"+Nazwy_wynikow[sort-1]+".txt", ios::app);
 
         cout<<"Ile razy? \n";                    // *Pętla ile razy*
         cin>>ilerazy;                                        
@@ -217,7 +217,6 @@ int main()
             if(wyniki.good())
             {
                 wyniki<<elapsed.count()<<endl;
-                
             }
             
         }
