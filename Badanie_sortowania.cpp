@@ -142,6 +142,8 @@ void Wybor_Sortowania(int tab[], int sort)
     }
 }
 
+string Nazwy_wynikow[5];
+
 bool Sprawdz_Sortowanie(int tab[])                  // sprawdzanie sortowania
 {
     check = true;
@@ -174,7 +176,12 @@ void Wypisz_Tablice(int tab[])                      // wypisywanie całej tablic
 int main()
 {   
     ofstream wyniki;
-    wyniki.open("wyniki.txt");
+
+    Nazwy_wynikow[0] = "Przez_Wybor";
+    Nazwy_wynikow[1] = "Przez_Wstawianie";
+    Nazwy_wynikow[2] = "Babelkowe";
+    Nazwy_wynikow[3] = "Przez_Scalanie";
+    Nazwy_wynikow[4] = "QuickSort";
 
 
     while(theend != 0)
@@ -187,6 +194,8 @@ int main()
         cout<<"Przez scalanie -> 4\n";
         cout<<"Szybkie -> 5\n";
         cin>>sort;
+
+        wyniki.open("AiZO"+Nazwy_wynikow[sort-1]+".txt");
 
         cout<<"Ile razy? \n";                    // *Pętla ile razy*
         cin>>ilerazy;                                        
@@ -212,6 +221,7 @@ int main()
             }
             
         }
+        wyniki.close();
         cout<<"Czy zakończyć?\n";
         cout<<"0 - aby zakończyć\n";
         cin>>theend;
