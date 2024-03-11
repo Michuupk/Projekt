@@ -223,7 +223,7 @@ int main()
         }
         wyniki.close();
         cout<<"Czy zakończyć?\n";
-        cout<<"0 - aby zakończyć\n";
+        cout<<"0 - aby zakończyć | 1 - aby kontynuwać\n";
         cin>>theend;
     }
 
