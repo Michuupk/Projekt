@@ -7,14 +7,16 @@ using namespace std;
 
 
 
-const unsigned int WielkoscTablicy = 10000;     // określanie rozmiaru tablicy
+const unsigned int WielkoscTablicy = 1000;     // określanie rozmiaru tablicy
 int Tablica[WielkoscTablicy];       // tworzenie tablicy o określonym rozmiarze
 int *temp_tab;
+string Nazwy_wynikow[5];
 
 unsigned short i = 0, n = 0;
 int ilerazy, theend = 1;
 short memo, sort = 0;
 bool check;
+
 
 void Losowanie_Tablicy()
 {
@@ -22,7 +24,7 @@ void Losowanie_Tablicy()
     unsigned int random;
     for(i = 0 ; i < WielkoscTablicy ; i++)
     {
-        random = rand() % 421;          //losowanie liczby w zakresie modulo 100
+        random = rand() % 755;          //losowanie liczby w zakresie modulo 100
         Tablica[i] = random;            //wpisywanie wylosowanych wartości do tablicy
     }
 }
@@ -79,19 +81,21 @@ void Sortowanie_Babelkowe(int tab[])                //sortowanie bąbelkowe
     {   
         for(i = 1; i <= n; i++)
         {
-            if (tab[i] < tab[i-1])
-            {
+                do
+                {
                 memo = tab[i-1];
                 tab[i-1] = tab[i];
                 tab[i] = memo;               
-            }
+                }
+                while(tab[i] < tab[i-1]);
         }
     }
 }
 
+
 void merge(int tab, int poczatek, int srodek, int koniec)
 {
-
+    
 
 
 
@@ -136,13 +140,12 @@ void Wybor_Sortowania(int tab[], int sort)
         
         case 5:     Sortowanie_Szybkie();
             break;
-
+            
         default: "Podaj prawidłową wartość";
             break;
     }
 }
 
-string Nazwy_wynikow[5];
 
 bool Sprawdz_Sortowanie(int tab[])                  // sprawdzanie sortowania
 {
@@ -175,13 +178,14 @@ void Wypisz_Tablice(int tab[])                      // wypisywanie całej tablic
 
 int main()
 {   
-    ofstream wyniki;
+    fstream wyniki;
 
     Nazwy_wynikow[0] = "Przez_Wybor";
     Nazwy_wynikow[1] = "Przez_Wstawianie";
     Nazwy_wynikow[2] = "Babelkowe";
     Nazwy_wynikow[3] = "Przez_Scalanie";
     Nazwy_wynikow[4] = "QuickSort";
+
 
 
     while(theend != 0)
@@ -202,6 +206,7 @@ int main()
         cout<<endl;
         
         cout<<"Sortowanie: \n";
+        
 
         for(ilerazy; ilerazy>0; ilerazy--)
         {
@@ -220,6 +225,7 @@ int main()
             }
             
         }
+        wyniki<<endl;
         wyniki.close();
         cout<<"Czy zakończyć?\n";
         cout<<"0 - aby zakończyć | 1 - aby kontynuwać\n";
