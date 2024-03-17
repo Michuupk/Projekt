@@ -6,8 +6,7 @@
 using namespace std;
 
 
-
-const unsigned int WielkoscTablicy = 1000;     // określanie rozmiaru tablicy
+const unsigned int WielkoscTablicy = 5000;     // określanie rozmiaru tablicy
 int Tablica[WielkoscTablicy];       // tworzenie tablicy o określonym rozmiarze
 int *temp_tab;
 string Nazwy_wynikow[5];
@@ -24,7 +23,7 @@ void Losowanie_Tablicy()
     unsigned int random;
     for(i = 0 ; i < WielkoscTablicy ; i++)
     {
-        random = rand() % 755;          //losowanie liczby w zakresie modulo 100
+        random = rand() % 1000;          //losowanie liczby w zakresie modulo 100
         Tablica[i] = random;            //wpisywanie wylosowanych wartości do tablicy
     }
 }
@@ -75,23 +74,34 @@ void Sortowanie_Przez_Wstawianie(int tab[])         //sortowanie przez wstaiwani
         }
     }
 }
-void Sortowanie_Babelkowe(int tab[])                //sortowanie bąbelkowe
+void Sortowanie_Babelkowe(int tab[]) // sortowanie bąbelkowe
 {
-    for(int n = WielkoscTablicy-1; n>=0; n--)       
-    {   
-        for(i = 1; i <= n; i++)
+    int min = 0;
+    int max = WielkoscTablicy - 1;
+    int zmiana;
+    do
+    {
+        zmiana = -1;
+        for (i = min; i < max; i++)
         {
-                do
+            if (tab[i] > tab[i + 1])
+            {
+                memo = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = memo;
+                if (zmiana < 0)
                 {
-                memo = tab[i-1];
-                tab[i-1] = tab[i];
-                tab[i] = memo;               
+                    min = i; // indeks pierwszej zmiany jako nowy początek pętli
                 }
-                while(tab[i] < tab[i-1]);
+                zmiana = i; // indeks zmiany jako wartość logiczna
+            }
         }
-    }
-}
 
+        if (min)
+            min--; // porównywanie poprzedniej liczbę wcześniej ze zbioru
+        max = zmiana;
+    } while (zmiana >= 0);
+}
 
 void merge(int tab, int poczatek, int srodek, int koniec)
 {
@@ -185,7 +195,6 @@ int main()
     Nazwy_wynikow[2] = "Babelkowe";
     Nazwy_wynikow[3] = "Przez_Scalanie";
     Nazwy_wynikow[4] = "QuickSort";
-
 
 
     while(theend != 0)
